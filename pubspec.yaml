@@ -1,0 +1,43 @@
+name: scan_pax
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  web_socket_channel: ^2.4.0
+  http: ^1.1.0
+  socket_io_client: ^2.0.2
+  camera: ^0.10.5+2
+  get: ^4.6.5
+  lottie: ^2.4.0
+  path_provider: ^2.0.15
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/animations/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Light.otf
+        - asset: fonts/Poppins-Regular.otf
+        - asset: fonts/Poppins-SemiBold.otf
+        - asset: fonts/Poppins-Medium.otf
+        - asset: fonts/Poppins-Bold.otf
+          weight: 700
+    - family: MyFlutterApp
+      fonts:
+        - asset: fonts/MyFlutterApp.ttf
