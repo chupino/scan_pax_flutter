@@ -1,10 +1,10 @@
 name: scan_pax
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: ">=3.0.3 <4.0.0"
 
 dependencies:
   flutter:
@@ -26,7 +26,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
     - assets/animations/
 
   fonts:

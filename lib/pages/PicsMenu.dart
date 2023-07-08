@@ -146,7 +146,7 @@ class _PicMenuState extends State<PicMenu> {
                           var request = http.MultipartRequest(
                             'POST',
                             Uri.parse(
-                                'https://2ff6-132-157-128-235.ngrok-free.app/convertir_imagen/'),
+                                'https://c1db-204-199-168-50.ngrok-free.app/convertir_imagen/'),
                           );
 
                           // Agregar la primera imagen
@@ -172,22 +172,38 @@ class _PicMenuState extends State<PicMenu> {
                           var responseData =
                               await response2.stream.bytesToString();
                           print(responseData);
-
-                          final Map<String, dynamic> response = {
-                            "status": 200,
-                            "message":
-                                "Se escanearon las fotos satisfactoriamente",
-                            "data": {
-                              "nombres": "Mauricio Diego",
-                              "apellidos": "Escalante Cunurana",
-                              "nro_documento": "76010300",
-                              "fecha_nacimiento": "09-04-2005",
-                              "sexo": "Masculino",
-                              "region": "Ilo",
-                              "direccion": "Alto Ilo A-12"
+                          final Map<String,dynamic> jsonDeDjango=json.decode(responseData);
+                           print("+++++++++++++++++++"+responseData);
+                          final Map<String,dynamic> dataParaVue={
+                            "status":200,
+                            "message":"Datos escaneados por el app",
+                            "data":{
+                              "numero_dni":jsonDeDjango["data"][0]["dniNum"],
+                              "paterno":jsonDeDjango["data"][0]["apePat"],
+                              "materno":jsonDeDjango["data"][0]["apeMat"],
+                              "nombres":jsonDeDjango["data"][0]["nombres"],
+                              "fecha_nacimiento":jsonDeDjango["data"][0]["fechNac"],
+                              "departamento":jsonDeDjango["data"][0]["dep"],
+                              "provincia":jsonDeDjango["data"][0]["prov"],
+                              "distrito":jsonDeDjango["data"][0]["dist"],
+                              "direccion":jsonDeDjango["data"][0]["dir"],
                             }
                           };
-                          socket?.emit('sendToVue', response);
+                          // final Map<String, dynamic> response = {
+                          //   "status": 200,
+                          //   "message":
+                          //       "Se escanearon las fotos satisfactoriamente",
+                          //   "data": {
+                          //     "nombres": "Mauricio Diego",
+                          //     "apellidos": "Escalante Cunurana",
+                          //     "nro_documento": "76010300",
+                          //     "fecha_nacimiento": "09-04-2005",
+                          //     "sexo": "Masculino",
+                          //     "region": "Ilo",
+                          //     "direccion": "Alto Ilo A-12"
+                          //   }
+                          // };
+                          socket?.emit('sendToVue', dataParaVue);
                           Get.toNamed('/');
                         } else {
                           Get.snackbar("Atención",
@@ -197,6 +213,8 @@ class _PicMenuState extends State<PicMenu> {
                                   const Color.fromARGB(255, 96, 169, 229),
                               colorText: Colors.white);
                         }
+                       
+
                       },
                     ),
                   ],

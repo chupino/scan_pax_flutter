@@ -1,4 +1,3 @@
-
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -7,15 +6,15 @@ class GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white
+      ..color = ui.Color.fromARGB(255, 255, 255, 255)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
     final width = size.width;
     final height = size.height;
 
-    final cardWidth = width * 0.8;
-    final cardHeight = cardWidth * 0.5;
+    final cardWidth = width * 0.75;
+    final cardHeight = cardWidth * 0.65;
     final cardX = (width - cardWidth) / 2;
     final cardY = (height - cardHeight) / 2;
 
@@ -48,7 +47,3 @@ class GridPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
-
-
-
-

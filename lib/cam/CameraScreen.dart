@@ -34,10 +34,11 @@ class _CameraScreenState extends State<CameraScreen> {
   void dispose() {
     _cameraController.dispose();
     SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
     super.dispose();
   }
 
+  // esa vaina para convertir base64 
   void _takePicture() async {
     try {
       await _initializeControllerFuture;
@@ -47,9 +48,11 @@ class _CameraScreenState extends State<CameraScreen> {
       final picBase64 = base64Encode(picBytes);
       print("BASE 64: $picBase64");
       String base64String = picBase64.toString();
-      final directory = await getExternalStorageDirectory(); // Obtiene el directorio de almacenamiento externo
-      final file = File('${directory!.path}/my_string.txt'); // El archivo donde se guardará la cadena
-      await file.writeAsString(picBytes.toString());
+      final directory =
+          await getExternalStorageDirectory(); // Obtiene el directorio de almacenamiento externo
+      final file = File(
+          '${directory!.path}/my_string.txt'); // El archivo donde se guardará la cadena
+      await file.writeAsString(picBase64.toString());
       print(file.path);
       Navigator.pop(context, picBytes);
 
@@ -89,10 +92,10 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
                 Container(
                   width: size.width * 0.12,
-                  color: Color.fromARGB(255, 84, 25, 104),
+                  color: Colors.transparent,
                   child: Center(
                     child: FloatingActionButton(
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.transparent,
                       onPressed: _takePicture,
                       child: Icon(
                         Icons.camera,
