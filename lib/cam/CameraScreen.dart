@@ -34,7 +34,7 @@ class _CameraScreenState extends State<CameraScreen> {
   void dispose() {
     _cameraController.dispose();
     SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     super.dispose();
   }
 
@@ -54,6 +54,7 @@ class _CameraScreenState extends State<CameraScreen> {
           '${directory!.path}/my_string.txt'); // El archivo donde se guardará la cadena
       await file.writeAsString(picBase64.toString());
       print(file.path);
+      
       Navigator.pop(context, picBytes);
 
       // Hacer algo con la imagen capturada, como guardarla o mostrarla en otra pantalla

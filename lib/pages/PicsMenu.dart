@@ -53,7 +53,7 @@ class _PicMenuState extends State<PicMenu> {
                 title: "Toma las fotos para la reserva de $nombre",
                 height: 180,
                 onTap: () {
-                  socket?.emit("cancelScan");
+                  socket?.emit("cancelScan", {"prueba"});
                   Get.back();
                 },
               ),
@@ -146,7 +146,10 @@ class _PicMenuState extends State<PicMenu> {
                           var request = http.MultipartRequest(
                             'POST',
                             Uri.parse(
-                                'https://c1db-204-199-168-50.ngrok-free.app/convertir_imagen/'),
+                                'https://d56f-132-184-129-114.ngrok-free.app/convertir_imagen/'),
+                               //'https://ea73-190-232-27-74.ngrok-free.app/convertir_imagen/')
+  
+
                           );
 
                           // Agregar la primera imagen
@@ -172,23 +175,28 @@ class _PicMenuState extends State<PicMenu> {
                           var responseData =
                               await response2.stream.bytesToString();
                           print(responseData);
-                          final Map<String,dynamic> jsonDeDjango=json.decode(responseData);
-                           print("+++++++++++++++++++"+responseData);
-                          final Map<String,dynamic> dataParaVue={
-                            "status":200,
-                            "message":"Datos escaneados por el app",
-                            "data":{
-                              "numero_dni":jsonDeDjango["data"][0]["dniNum"],
-                              "paterno":jsonDeDjango["data"][0]["apePat"],
-                              "materno":jsonDeDjango["data"][0]["apeMat"],
-                              "nombres":jsonDeDjango["data"][0]["nombres"],
-                              "fecha_nacimiento":jsonDeDjango["data"][0]["fechNac"],
-                              "departamento":jsonDeDjango["data"][0]["dep"],
-                              "provincia":jsonDeDjango["data"][0]["prov"],
-                              "distrito":jsonDeDjango["data"][0]["dist"],
-                              "direccion":jsonDeDjango["data"][0]["dir"],
-                            }
+                          /* final Map<String,dynamic> jsonDeDjango=json.decode(responseData); */
+                          print("+++++++++++++++++++" + responseData);
+                          final Map<String, dynamic> decodedData =
+                              jsonDecode(responseData);
+                              print(decodedData);
+                          final Map<String, dynamic> dataParaVue = {
+                            "status": 200,
+                            "message": "Datos escaneados por el app",
+                            "data": {
+                              "numero_dni": decodedData["data"]["dniNum"],
+                              "paterno": decodedData["data"]["apePat"],
+                              "materno": decodedData["data"]["apeMat"],
+                              "nombres": decodedData["data"]["nombres"],
+                              "fecha_nacimiento": decodedData["data"]
+                                  ["fechNac"],
+                              "departamento": decodedData["data"]["dep"],
+                              "provincia": decodedData["data"]["prov"],
+                              "distrito": decodedData["data"]["dist"],
+                              "direccion": decodedData["data"]["dir"],
+                            },
                           };
+
                           // final Map<String, dynamic> response = {
                           //   "status": 200,
                           //   "message":
@@ -213,8 +221,6 @@ class _PicMenuState extends State<PicMenu> {
                                   const Color.fromARGB(255, 96, 169, 229),
                               colorText: Colors.white);
                         }
-                       
-
                       },
                     ),
                   ],

@@ -15,7 +15,7 @@ void main() {
 
 class MainApp extends StatelessWidget {
   MainApp({Key? key}) : super(key: key) {
-    _socket = IO.io('http://192.168.43.2:3000',
+    _socket = IO.io('https://api.express.vallesur.bjrcode.com/',
         IO.OptionBuilder().setTransports(['websocket']).build());
     _connectSocket();
   }
@@ -29,13 +29,13 @@ class MainApp extends StatelessWidget {
         (data) => {print(data), Get.toNamed('/PicMenu', arguments: data)});
   }
 
-  final IO.Socket socket = IO.io('http://192.168.129.214:3000',
-      IO.OptionBuilder().setTransports(['websocket']).build());
+ /*  final IO.Socket socket = IO.io('http://192.168.129.214:3000',
+      IO.OptionBuilder().setTransports(['websocket']).build()); */
 
   @override
   Widget build(BuildContext context) {
     return SocketProvider(
-      socket: socket,
+      socket: _socket,
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
